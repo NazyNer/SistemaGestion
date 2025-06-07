@@ -2,7 +2,7 @@ namespace SistemaGestion.Models;
 
 public class ErrorViewModel
 {
-    public string? RequestId { get; set; }
+    public string? request_id { get; set; }
 
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    public bool show_request_id => !string.IsNullOrEmpty(request_id);
 }
