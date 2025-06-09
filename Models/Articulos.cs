@@ -22,6 +22,7 @@ public class Articulo
     public string Ubicacion { get; set; } = "S/U";
     public DateTime Fecha_modificacion { get; set; }
     public int Porcentaje_ganancia { get; set; } = 0;
+    public bool Eliminado { get; set; } 
     public virtual Marca Marca { get; set; } = null!;
     public virtual Rubro Rubro { get; set; } = null!;
 }
