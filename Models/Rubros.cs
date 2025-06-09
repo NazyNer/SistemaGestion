@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SistemaGestion.Models;
 
-public class Marca
+public class Rubro
 {
     [Key]
-    public int Id_marca{ get; set; }
+    public int Id_rubro{ get; set; }
     public string? Nombre { get; set; }
 }
