@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaGestion.Models;
 using SistemaGestion.Models.usos_articulos;
+using SistemaGestion.Models.usos_usuarios;
 
 namespace SistemaGestion.Data;
 

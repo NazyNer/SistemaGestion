@@ -12,8 +12,8 @@ using SistemaGestion.Data;
 namespace SistemaGestion.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250609201718_Articulos")]
-    partial class Articulos
+    [Migration("20250609210406_Usuarios roles y mas")]
+    partial class Usuariosrolesymas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -304,6 +304,38 @@ namespace SistemaGestion.Migrations
                     b.ToTable("Condiciones_Iva");
                 });
 
+            modelBuilder.Entity("SistemaGestion.Models.Localidad", b =>
+                {
+                    b.Property<int>("Id_localidad")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_localidad"));
+
+                    b.Property<string>("Codigo_postal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocalidadNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProvinciaId_provincia")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UsuarioId_usuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_localidad");
+
+                    b.HasIndex("ProvinciaId_provincia");
+
+                    b.HasIndex("UsuarioId_usuario");
+
+                    b.ToTable("Localidades");
+                });
+
             modelBuilder.Entity("SistemaGestion.Models.Marca", b =>
                 {
                     b.Property<int>("Id_marca")
@@ -318,6 +350,43 @@ namespace SistemaGestion.Migrations
                     b.HasKey("Id_marca");
 
                     b.ToTable("Marcas");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Pais", b =>
+                {
+                    b.Property<int>("Id_pais")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_pais"));
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_pais");
+
+                    b.ToTable("Paises");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Provincia", b =>
+                {
+                    b.Property<int>("Id_provincia")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_provincia"));
+
+                    b.Property<int?>("PaisId_pais")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProvinciaNombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_provincia");
+
+                    b.HasIndex("PaisId_pais");
+
+                    b.ToTable("Provincias");
                 });
 
             modelBuilder.Entity("SistemaGestion.Models.Rubro", b =>
@@ -350,6 +419,43 @@ namespace SistemaGestion.Migrations
                     b.HasKey("Id_tipo_pago");
 
                     b.ToTable("Tipos_Pago");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id_usuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_usuario"));
+
+                    b.Property<string>("Celular")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Condicion_iva")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contacto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contraseña")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cuit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Razon_social")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_usuario");
+
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("SistemaGestion.Models.usos_articulos.Articulo_tipo_pago", b =>
@@ -391,6 +497,81 @@ namespace SistemaGestion.Migrations
                     b.HasKey("Id_articulos_medida_unidades");
 
                     b.ToTable("Articulos_medida_unidades");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.usos_usuarios.Cliente", b =>
+                {
+                    b.Property<int>("Id_clientes")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_clientes"));
+
+                    b.Property<string>("Contacto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Limite_cta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rubro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Saldo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UsuarioId_usuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_clientes");
+
+                    b.HasIndex("UsuarioId_usuario");
+
+                    b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.usos_usuarios.Proveedor", b =>
+                {
+                    b.Property<int>("Id_proveedores")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_proveedores"));
+
+                    b.Property<string>("Saldo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UsuarioId_usuario")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Web")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_proveedores");
+
+                    b.HasIndex("UsuarioId_usuario");
+
+                    b.ToTable("Proveedores");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.usos_usuarios.Vendedor", b =>
+                {
+                    b.Property<int>("Id_vendedores")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_vendedores"));
+
+                    b.Property<string>("Sueldo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UsuarioId_usuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_vendedores");
+
+                    b.HasIndex("UsuarioId_usuario");
+
+                    b.ToTable("Vendedores");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -461,6 +642,78 @@ namespace SistemaGestion.Migrations
                     b.Navigation("Marca");
 
                     b.Navigation("Rubro");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Localidad", b =>
+                {
+                    b.HasOne("SistemaGestion.Models.Provincia", "Provincia")
+                        .WithMany("Localidads")
+                        .HasForeignKey("ProvinciaId_provincia");
+
+                    b.HasOne("SistemaGestion.Models.Usuario", "Usuario")
+                        .WithMany("Localidad")
+                        .HasForeignKey("UsuarioId_usuario");
+
+                    b.Navigation("Provincia");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Provincia", b =>
+                {
+                    b.HasOne("SistemaGestion.Models.Pais", "Pais")
+                        .WithMany("Provincia")
+                        .HasForeignKey("PaisId_pais");
+
+                    b.Navigation("Pais");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.usos_usuarios.Cliente", b =>
+                {
+                    b.HasOne("SistemaGestion.Models.Usuario", "Usuario")
+                        .WithMany("Clientes")
+                        .HasForeignKey("UsuarioId_usuario");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.usos_usuarios.Proveedor", b =>
+                {
+                    b.HasOne("SistemaGestion.Models.Usuario", "Usuario")
+                        .WithMany("Proveedores")
+                        .HasForeignKey("UsuarioId_usuario");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.usos_usuarios.Vendedor", b =>
+                {
+                    b.HasOne("SistemaGestion.Models.Usuario", "Usuario")
+                        .WithMany("Vendedores")
+                        .HasForeignKey("UsuarioId_usuario");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Pais", b =>
+                {
+                    b.Navigation("Provincia");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Provincia", b =>
+                {
+                    b.Navigation("Localidads");
+                });
+
+            modelBuilder.Entity("SistemaGestion.Models.Usuario", b =>
+                {
+                    b.Navigation("Clientes");
+
+                    b.Navigation("Localidad");
+
+                    b.Navigation("Proveedores");
+
+                    b.Navigation("Vendedores");
                 });
 #pragma warning restore 612, 618
         }

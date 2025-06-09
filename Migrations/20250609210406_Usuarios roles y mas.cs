@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SistemaGestion.Migrations
 {
     /// <inheritdoc />
-    public partial class Articulos : Migration
+    public partial class Usuariosrolesymas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -107,6 +107,19 @@ namespace SistemaGestion.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Paises",
+                columns: table => new
+                {
+                    Id_pais = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Paises", x => x.Id_pais);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rubros",
                 columns: table => new
                 {
@@ -130,6 +143,26 @@ namespace SistemaGestion.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tipos_Pago", x => x.Id_tipo_pago);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id_usuario = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cuit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contacto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Razon_social = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Celular = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Condicion_iva = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id_usuario);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,6 +272,25 @@ namespace SistemaGestion.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Provincias",
+                columns: table => new
+                {
+                    Id_provincia = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProvinciaNombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaisId_pais = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Provincias", x => x.Id_provincia);
+                    table.ForeignKey(
+                        name: "FK_Provincias_Paises_PaisId_pais",
+                        column: x => x.PaisId_pais,
+                        principalTable: "Paises",
+                        principalColumn: "Id_pais");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Articulos",
                 columns: table => new
                 {
@@ -273,6 +325,94 @@ namespace SistemaGestion.Migrations
                         principalTable: "Rubros",
                         principalColumn: "Id_rubro",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    Id_clientes = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Contacto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rubro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Limite_cta = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Saldo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UsuarioId_usuario = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.Id_clientes);
+                    table.ForeignKey(
+                        name: "FK_Clientes_Usuarios_UsuarioId_usuario",
+                        column: x => x.UsuarioId_usuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id_usuario");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Proveedores",
+                columns: table => new
+                {
+                    Id_proveedores = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Saldo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Web = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UsuarioId_usuario = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Proveedores", x => x.Id_proveedores);
+                    table.ForeignKey(
+                        name: "FK_Proveedores_Usuarios_UsuarioId_usuario",
+                        column: x => x.UsuarioId_usuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id_usuario");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vendedores",
+                columns: table => new
+                {
+                    Id_vendedores = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Sueldo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UsuarioId_usuario = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vendedores", x => x.Id_vendedores);
+                    table.ForeignKey(
+                        name: "FK_Vendedores_Usuarios_UsuarioId_usuario",
+                        column: x => x.UsuarioId_usuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id_usuario");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Localidades",
+                columns: table => new
+                {
+                    Id_localidad = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LocalidadNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Codigo_postal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinciaId_provincia = table.Column<int>(type: "int", nullable: true),
+                    UsuarioId_usuario = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Localidades", x => x.Id_localidad);
+                    table.ForeignKey(
+                        name: "FK_Localidades_Provincias_ProvinciaId_provincia",
+                        column: x => x.ProvinciaId_provincia,
+                        principalTable: "Provincias",
+                        principalColumn: "Id_provincia");
+                    table.ForeignKey(
+                        name: "FK_Localidades_Usuarios_UsuarioId_usuario",
+                        column: x => x.UsuarioId_usuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id_usuario");
                 });
 
             migrationBuilder.CreateIndex(
@@ -323,6 +463,36 @@ namespace SistemaGestion.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clientes_UsuarioId_usuario",
+                table: "Clientes",
+                column: "UsuarioId_usuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Localidades_ProvinciaId_provincia",
+                table: "Localidades",
+                column: "ProvinciaId_provincia");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Localidades_UsuarioId_usuario",
+                table: "Localidades",
+                column: "UsuarioId_usuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Proveedores_UsuarioId_usuario",
+                table: "Proveedores",
+                column: "UsuarioId_usuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Provincias_PaisId_pais",
+                table: "Provincias",
+                column: "PaisId_pais");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vendedores_UsuarioId_usuario",
+                table: "Vendedores",
+                column: "UsuarioId_usuario");
         }
 
         /// <inheritdoc />
@@ -353,10 +523,22 @@ namespace SistemaGestion.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Clientes");
+
+            migrationBuilder.DropTable(
                 name: "Condiciones_Iva");
 
             migrationBuilder.DropTable(
+                name: "Localidades");
+
+            migrationBuilder.DropTable(
+                name: "Proveedores");
+
+            migrationBuilder.DropTable(
                 name: "Tipos_Pago");
+
+            migrationBuilder.DropTable(
+                name: "Vendedores");
 
             migrationBuilder.DropTable(
                 name: "Marcas");
@@ -369,6 +551,15 @@ namespace SistemaGestion.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Provincias");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "Paises");
         }
     }
 }

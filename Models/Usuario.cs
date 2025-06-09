@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using SistemaGestion.Models.usos_usuarios;
 
 namespace SistemaGestion.Models;
 
@@ -14,8 +15,8 @@ public class Usuario
     public string? Razon_social { get; set; }
     public string? Celular { get; set; }
     public string? Condicion_iva { get; set; }
-    public virtual ICollection<Localidad>? Localidad { get; set; } 
-    public virtual ICollection<Cliente>? Clientes { get; set;}
+    public virtual ICollection<Localidad>? Localidad { get; set; }
+    public virtual ICollection<Cliente>? Clientes { get; set; }
     public virtual ICollection<Proveedor>? Proveedores { get; set; }
     public virtual ICollection<Vendedor>? Vendedores { get; set; }
 }
