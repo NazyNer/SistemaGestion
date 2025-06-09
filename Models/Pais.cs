@@ -5,7 +5,7 @@ namespace SistemaGestion.Models;
 public class Pais
 {
     [Key]
-    public int PaisId { get; set; }
-    public string Nombre { get; set; }
+    public int Id_pais { get; set; }
+    public string? Nombre { get; set; }
     public virtual ICollection <Provincia>? Provincia { get; set; }
 }
