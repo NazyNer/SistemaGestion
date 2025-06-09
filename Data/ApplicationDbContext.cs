@@ -17,4 +17,11 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Tipo_pago> Tipos_Pago { get; set; }
     public DbSet<Articulo_tipo_pago> Articulos_Tipos_Pago { get; set; }
     public DbSet<Articulos_medida_unidades> Articulos_medida_unidades { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
+    public DbSet<Localidad> Localidades { get; set; }
+    public DbSet<Pais> Paises { get; set; }
+    public DbSet<Provincia> Provincias { get; set; }
+    public DbSet<Proveedor> Proveedores { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Vendedor> Vendedores { get; set; }
 }
