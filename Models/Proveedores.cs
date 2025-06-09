@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SistemaGestion.Models;
 
-public class Proveedores
+public class Proveedor
 {
     [Key]
     public int Id_proveedores { get; set; }

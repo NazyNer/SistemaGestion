@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SistemaGestion.Models;
 
-public class Vendedores
+public class Vendedor
 {
     [Key]
     public int Id_vendedores { get; set; }
