@@ -1,20 +1,26 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SistemaGestion.Models;
-
 namespace SistemaGestion.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IRoleInitializerService _roleInitializerService;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IRoleInitializerService roleInitializerService)
     {
         _logger = logger;
+        _roleInitializerService = roleInitializerService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+        var Roles = await _roleInitializerService.InicializarRolesAsync();
+        if (Roles != null)
+        {
+            Console.WriteLine("Cargando Vista...");
+        }
         return View();
     }
 
