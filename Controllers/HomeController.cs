@@ -6,12 +6,14 @@ namespace SistemaGestion.Controllers;
 public class HomeController : Controller
 {
     private readonly IRoleInitializerService _roleInitializerService;
+    private readonly IAdminCreateService _adminCreateService;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger, IRoleInitializerService roleInitializerService)
+    public HomeController(ILogger<HomeController> logger, IRoleInitializerService roleInitializerService, IAdminCreateService adminCreateService)
     {
         _logger = logger;
         _roleInitializerService = roleInitializerService;
+        _adminCreateService = adminCreateService;
     }
 
     public async Task<IActionResult> Index()
@@ -21,6 +23,7 @@ public class HomeController : Controller
         {
             Console.WriteLine("Cargando Vista...");
         }
+        await _adminCreateService.InitializarAdminAsync();
         return View();
     }
 

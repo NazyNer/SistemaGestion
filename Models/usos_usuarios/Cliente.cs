@@ -6,6 +6,7 @@ public class Cliente
 {
     [Key]
     public int Id_clientes { get; set; }
+    public int Id_usuario { get; set; }
     public string? Contacto { get; set; }
     public string? Rubro { get; set; }
     public string? Limite_cta { get; set; }

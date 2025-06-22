@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-SistemaGestion-a73e3403-03fc-420c-b8ca-39c438fe3d43</UserSecretsId>
+    <UserSecretsId>SistemaGestion.AdminSettings</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

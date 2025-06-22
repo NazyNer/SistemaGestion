@@ -18,6 +18,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IRoleInitializerService, RoleInitializerService>();
+builder.Services.AddScoped<IAdminCreateService, AdminCreateService>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 8;
+    options.Password.RequiredUniqueChars = 0;
+});
 
 var app = builder.Build();
 

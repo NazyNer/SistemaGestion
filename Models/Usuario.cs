@@ -7,6 +7,8 @@ public class Usuario
 {
     [Key]
     public int Id_usuario { get; set; }
+    public string? Id_user { get; set; }
+    public string? Id_rol  { get; set; }
     public string? Contraseña { get; set; }
     public string? Email { get; set; }
     public string? Cuit { get; set; }
@@ -14,9 +16,10 @@ public class Usuario
     public string? Direccion { get; set; }
     public string? Razon_social { get; set; }
     public string? Celular { get; set; }
-    public string? Condicion_iva { get; set; }
+    public int Condicion_iva { get; set; }
     public bool Eliminado { get; set; } 
-    public virtual ICollection<Localidad>? Localidad { get; set; }
+    public int Id_localidad { get; set; }
+    public virtual Localidad? Localidad { get; set; }
     public virtual ICollection<Cliente>? Clientes { get; set; }
     public virtual ICollection<Proveedor>? Proveedores { get; set; }
     public virtual ICollection<Vendedor>? Vendedores { get; set; }
