@@ -5,6 +5,7 @@ namespace SistemaGestion.Models;
 public class Tipo_pago
 {
     [Key]
-    public int Id_tipo_pago{ get; set; }
+    public int Id_tipo_pago { get; set; }
     public string? Nombre { get; set; }
+    public bool Eliminado { get; set; }
 }

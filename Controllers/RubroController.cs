@@ -48,7 +48,7 @@ public class RubroController : Controller
                 {
                     var nuevo_rubro = new Rubro
                     {
-                        Nombre = Nombre,
+                        Nombre = Nombre
                     };
                     _context.Rubros.Add(nuevo_rubro);
                     _context.SaveChanges();
